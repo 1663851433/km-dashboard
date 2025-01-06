@@ -10,8 +10,8 @@ import { useState } from 'react'
 const navItems = [
   { href: "/", icon: Home, label: "主页" },
   { href: "/purchase", icon: BarChart, label: "周采购面板" },
-  { href: "/users", icon: Users, label: "用户管理" },
-  { href: "/settings", icon: Settings, label: "系统设置" },
+  // { href: "/users", icon: Users, label: "用户管理" },
+  // { href: "/settings", icon: Settings, label: "系统设置" },
 ]
 
 export function DashboardSidebar() {
