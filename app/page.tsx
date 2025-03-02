@@ -1,3 +1,7 @@
+/**
+ * 主页
+ */
+
 import { DashboardHeader } from '@/components/dashboard-header'
 import { DashboardCharts } from '@/components/dashboard-charts'
 import { DashboardMetrics } from '@/components/dashboard-metrics'
