@@ -56,7 +56,7 @@ export function DashboardSidebar({className}:{className?:string}) {
             )
           })}
           
-          <div className="mt-auto">
+          {/* <div className="mt-auto">
             <TooltipRoot>
               <TooltipTrigger asChild>
                 <Button variant="ghost" size="icon" className="h-10 w-10 text-white">
@@ -67,7 +67,7 @@ export function DashboardSidebar({className}:{className?:string}) {
                 退出系统
               </TooltipContent>
             </TooltipRoot>
-          </div>
+          </div> */}
         </div>
       </div>
     </TooltipProvider>
