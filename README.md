@@ -1,14 +1,45 @@
 # KM Dashboard
 
-A modern dashboard built with Next.js, Tailwind CSS, and Recharts.
+Knowledge Management Dashboard built with Next.js 13+
+
+## Project Structure
+
+```
+├── app/                    # Next.js 13+ App Router
+│   ├── api/               # API Routes
+│   ├── (routes)/         # App Routes
+│   ├── layout.tsx        # Root Layout
+│   └── page.tsx          # Home Page
+├── public/                # Static Assets
+│   └── assets/           # Images, Fonts, etc.
+├── src/
+│   ├── components/       # Reusable Components
+│   ├── hooks/           # Custom React Hooks
+│   ├── services/        # API Services
+│   ├── styles/          # Global Styles
+│   ├── types/           # TypeScript Types
+│   ├── utils/           # Utility Functions
+│   ├── constants/       # Constants and Config
+│   └── context/         # React Context
+├── package.json
+└── tsconfig.json
+```
 
 ## Features
 
-- 📊 Real-time data visualization
-- 🎨 Modern UI with dark theme
-- 📱 Responsive design
-- ⚡ Server-side rendering
-- 🔄 Dynamic imports for better performance
+- Next.js 13+ App Router
+- TypeScript
+- Tailwind CSS
+- API Routes
+- Responsive Design
+
+## Development
+
+- Follow the file structure convention
+- Use TypeScript for type safety
+- Follow the existing code style
+- Add comments for complex logic
+- Keep components small and focused
 
 ## Tech Stack
 
@@ -20,13 +51,17 @@ A modern dashboard built with Next.js, Tailwind CSS, and Recharts.
 
 ## Getting Started
 
-1. Clone the repository:
-
+1. Install dependencies:
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Run the development server:
+```bash
+npm run dev
+```
+
+3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
