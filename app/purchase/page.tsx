@@ -219,7 +219,7 @@ export default function PurchasePage() {
               </CardHeader>
               <CardContent className="py-3 px-4">
                 <div className="flex flex-col gap-2">
-                  {operationData.map((item, index) => (
+                  {operationData.map((item) => (
                     <div 
                       key={item.day}
                       className="flex items-center justify-between p-2 rounded-lg bg-white/80 border border-gray-100 hover:shadow-sm transition-shadow"

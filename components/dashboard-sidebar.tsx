@@ -1,6 +1,6 @@
 "use client"
 
-import { Home, BarChart, Users, Settings, Power, ChevronRight,Backpack } from 'lucide-react'
+import { Home, BarChart, ChevronRight,Backpack } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { TooltipProvider, TooltipRoot, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"
 import Link from 'next/link'

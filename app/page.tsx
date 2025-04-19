@@ -4,7 +4,6 @@
 
 import { DashboardHeader } from '@/components/dashboard-header'
 import { DashboardCharts } from '@/components/dashboard-charts'
-import { DashboardMetrics } from '@/components/dashboard-metrics'
 import { DashboardSidebar } from '@/components/dashboard-sidebar'
 
 export default function DashboardPage() {

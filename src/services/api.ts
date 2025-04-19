@@ -17,7 +17,7 @@ export async function fetchData<T>(endpoint: string, options?: RequestInit): Pro
 
 export const api = {
   get: <T>(endpoint: string) => fetchData<T>(endpoint),
-  post: <T>(endpoint: string, data: any) =>
+  post: <T>(endpoint: string, data: Record<string,{}>) =>
     fetchData<T>(endpoint, {
       method: 'POST',
       body: JSON.stringify(data),

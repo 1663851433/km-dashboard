@@ -12,13 +12,16 @@ export function formatNumber(num: number): string {
   return new Intl.NumberFormat('zh-CN').format(num);
 }
 
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: never[]) => void>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
-  let timeout: NodeJS.Timeout;
-  return function (...args: Parameters<T>) {
+  let timeout: ReturnType<typeof setTimeout>;
+  
+  return function (...args: Parameters<T>): void {
     clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), wait);
+    timeout = setTimeout(() => {
+      func(...args);
+    }, wait);
   };
-} 
+}
