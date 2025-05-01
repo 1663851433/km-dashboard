@@ -12,6 +12,7 @@ const navItems = [
   { href: "/", icon: Home, label: "主页" },
   { href: "/purchase", icon: BarChart, label: "周采购面板" },
   { href: "/rosinPrice", icon: Backpack, label: "松香价格面板" },
+  { href: "/artificialCollection", icon: Backpack, label: "人工收集" },
   // { href: "/users", icon: Users, label: "用户管理" },
   // { href: "/settings", icon: Settings, label: "系统设置" },
 ]
