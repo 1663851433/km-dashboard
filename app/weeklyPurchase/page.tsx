@@ -6,7 +6,7 @@ import WeeklyPurchaseDashboard from "./components/WeeklyPurchaseDashboard";
  */
 export default () => {
   return (
-    <MainPage className="bg-gray-100">
+    <MainPage>
       <WeeklyPurchaseDashboard />
     </MainPage>
   );

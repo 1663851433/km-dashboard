@@ -48,7 +48,7 @@ export function DashboardSidebar({ className }: { className?: string }) {
         </div>
 
         <div
-          className={`transition-opacity duration-300 ${
+          className={`transition-opacity ${
             isExpanded ? "opacity-100" : "opacity-0"
           } flex flex-col items-center space-y-2`}
         >

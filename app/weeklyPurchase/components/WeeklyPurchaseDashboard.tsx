@@ -14,8 +14,6 @@ import CurTime from "./CurTime";
 const WeeklyPurchaseDashboard: React.FC = () => {
   return (
     <div className="p-4 space-y-4 w-full h-full overflow-auto">
-      <Header />
-
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         {/* 左侧内容 */}
         <div className="lg:col-span-6 space-y-4">

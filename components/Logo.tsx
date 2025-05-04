@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import Logo from "@/src/assets/img/logo.png";
 import { useRouter } from "next/navigation";

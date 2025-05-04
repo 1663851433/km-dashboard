@@ -61,8 +61,6 @@ export default () => {
   return (
     <MainPage className="bg-gray-50 text-black relative">
       <Container className="shadow bg-[#f1f0ec] border border-gray-100 p-4 relative">
-        <Logo className="absolute left-0 top-[10px] -translate-x-[110%]" />
-
         <section className="flex flex-col gap-[10px]">
           <Row align="middle">
             <Col flex="100px">
