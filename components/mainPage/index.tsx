@@ -15,7 +15,7 @@ const MainPage = ({ className, children }: { className?: string; children: React
         }}
       >
         <Header />
-        <div className="flex-1">{children}</div>
+        <div className="flex-1 overflow-auto">{children}</div>
       </div>
     </div>
   );

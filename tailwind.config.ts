@@ -54,6 +54,10 @@ const config: Config = {
           background: "#1a1f37",
           card: "#242a45",
         },
+        'custom-green': '#a2ccb6',
+        'light-peach': '#ffecd9',
+        'peach': '#ee786e',
+        'sand': '#fceeb5',
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -15,6 +15,8 @@ import {
   Legend,
 } from "recharts";
 import { DashboardSidebar } from "@/components/dashboard-sidebar";
+import MainPage from "@/components/mainPage";
+import dayjs from "dayjs";
 
 const dataLine = [
   { name: "2/28/24", price: 8800, region1: 8800, region2: 8850, region3: 8900 },
@@ -66,10 +68,9 @@ const RosinPricePanel: React.FC = () => {
   }
 
   return (
-    <div className="flex h-screen">
-      <DashboardSidebar className="h-full" />
+    <MainPage>
       <div
-        className="flex-1 overflow-auto bg-gray-50 flex items-center p-4"
+        className="overflow-auto flex items-center p-4"
         style={{ fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif" }}
       >
         <div className="max-w-[1200px] w-full mx-auto rounded-xl shadow-lg bg-[#f1f0ec] border border-gray-100 p-4">
@@ -84,7 +85,7 @@ const RosinPricePanel: React.FC = () => {
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-              <span className="text-lg text-gray-600">2025-01-22</span>
+              <span className="text-lg text-gray-600">{dayjs().format("YYYY-MM-DD")}</span>
             </div>
           </div>
 
@@ -94,7 +95,7 @@ const RosinPricePanel: React.FC = () => {
               className="flex-1 rounded-lg p-4 bg-white hover:shadow-lg transition-shadow duration-200"
               style={{
                 boxShadow: "0 2px 4px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)",
-                border: "1px solid rgba(0,0,0,0.05)"
+                border: "1px solid rgba(0,0,0,0.05)",
               }}
             >
               <h2 className="text-gray-500 mb-1 text-sm">7天内高价</h2>
@@ -104,7 +105,7 @@ const RosinPricePanel: React.FC = () => {
               className="flex-1 rounded-lg p-4 bg-white hover:shadow-lg transition-shadow duration-200"
               style={{
                 boxShadow: "0 2px 4px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)",
-                border: "1px solid rgba(0,0,0,0.05)"
+                border: "1px solid rgba(0,0,0,0.05)",
               }}
             >
               <h2 className="text-gray-500 mb-1 text-sm">7天内低价</h2>
@@ -114,7 +115,7 @@ const RosinPricePanel: React.FC = () => {
               className="flex-1 rounded-lg p-4 bg-white hover:shadow-lg transition-shadow duration-200"
               style={{
                 boxShadow: "0 2px 4px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)",
-                border: "1px solid rgba(0,0,0,0.05)"
+                border: "1px solid rgba(0,0,0,0.05)",
               }}
             >
               <h2 className="text-gray-500 mb-1 text-sm">采购均价市场均价差</h2>
@@ -127,7 +128,7 @@ const RosinPricePanel: React.FC = () => {
               className="rounded-lg p-4 bg-white hover:shadow-lg transition-shadow duration-200"
               style={{
                 boxShadow: "0 2px 4px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)",
-                border: "1px solid rgba(0,0,0,0.05)"
+                border: "1px solid rgba(0,0,0,0.05)",
               }}
             >
               <div className="flex items-center gap-4 mb-2">
@@ -136,7 +137,12 @@ const RosinPricePanel: React.FC = () => {
                 </span>
                 <span className="text-gray-500 text-sm">湿地松松香价格240325-250120</span>
               </div>
-              <LineChart width={520} height={220} data={dataLine} margin={{ top: 2, right: 2, bottom: 2, left: -10 }}>
+              <LineChart
+                width={520}
+                height={220}
+                data={dataLine}
+                margin={{ top: 2, right: 2, bottom: 2, left: -10 }}
+              >
                 <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} />
                 <YAxis stroke="#94a3b8" fontSize={12} />
                 <Tooltip
@@ -144,7 +150,7 @@ const RosinPricePanel: React.FC = () => {
                     backgroundColor: "white",
                     border: "none",
                     boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-                    fontSize: "12px"
+                    fontSize: "12px",
                   }}
                 />
                 <Legend wrapperStyle={{ fontSize: "12px" }} />
@@ -179,7 +185,7 @@ const RosinPricePanel: React.FC = () => {
               className="rounded-lg p-4 bg-white hover:shadow-lg transition-shadow duration-200"
               style={{
                 boxShadow: "0 2px 4px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)",
-                border: "1px solid rgba(0,0,0,0.05)"
+                border: "1px solid rgba(0,0,0,0.05)",
               }}
             >
               <div className="mb-2">
@@ -204,10 +210,13 @@ const RosinPricePanel: React.FC = () => {
                     </tr>
                   </tbody>
                 </table>
-                <h3 className="text-base font-medium text-gray-800 mb-2">
-                  未来14天价格走势
-                </h3>
-                <BarChart width={520} height={160} data={dataBar} margin={{ top: 2, right: 2, bottom: 2, left: -10 }}>
+                <h3 className="text-base font-medium text-gray-800 mb-2">未来14天价格走势</h3>
+                <BarChart
+                  width={520}
+                  height={160}
+                  data={dataBar}
+                  margin={{ top: 2, right: 2, bottom: 2, left: -10 }}
+                >
                   <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} />
                   <YAxis stroke="#94a3b8" fontSize={12} />
                   <Tooltip
@@ -215,7 +224,7 @@ const RosinPricePanel: React.FC = () => {
                       backgroundColor: "white",
                       border: "none",
                       boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-                      fontSize: "12px"
+                      fontSize: "12px",
                     }}
                   />
                   <Bar dataKey="price" fill="#FFB800" radius={[4, 4, 0, 0]} />
@@ -227,13 +236,18 @@ const RosinPricePanel: React.FC = () => {
               className="rounded-lg p-4 bg-white hover:shadow-lg transition-shadow duration-200"
               style={{
                 boxShadow: "0 2px 4px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)",
-                border: "1px solid rgba(0,0,0,0.05)"
+                border: "1px solid rgba(0,0,0,0.05)",
               }}
             >
               <h3 className="text-base font-medium text-gray-800 mb-2">
                 湿地松市场价与KM松香会议价格
               </h3>
-              <LineChart width={520} height={220} data={dataLine} margin={{ top: 2, right: 2, bottom: 2, left: -10 }}>
+              <LineChart
+                width={520}
+                height={220}
+                data={dataLine}
+                margin={{ top: 2, right: 2, bottom: 2, left: -10 }}
+              >
                 <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} />
                 <YAxis stroke="#94a3b8" fontSize={12} />
                 <Tooltip
@@ -241,7 +255,7 @@ const RosinPricePanel: React.FC = () => {
                     backgroundColor: "white",
                     border: "none",
                     boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-                    fontSize: "12px"
+                    fontSize: "12px",
                   }}
                 />
                 <Legend wrapperStyle={{ fontSize: "12px" }} />
@@ -285,7 +299,7 @@ const RosinPricePanel: React.FC = () => {
                 className="rounded-lg p-4 bg-white hover:shadow-lg transition-shadow duration-200"
                 style={{
                   boxShadow: "0 2px 4px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)",
-                  border: "1px solid rgba(0,0,0,0.05)"
+                  border: "1px solid rgba(0,0,0,0.05)",
                 }}
               >
                 <h3 className="text-base font-medium text-gray-800 mb-2">供给端</h3>
@@ -303,10 +317,7 @@ const RosinPricePanel: React.FC = () => {
                       labelLine={true}
                     >
                       {dataPie.map((entry, index) => (
-                        <Cell
-                          key={`cell-${index}`}
-                          fill={COLORS[index % COLORS.length]}
-                        />
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                     </Pie>
                     <Tooltip
@@ -314,13 +325,10 @@ const RosinPricePanel: React.FC = () => {
                         backgroundColor: "white",
                         border: "none",
                         boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-                        fontSize: "12px"
+                        fontSize: "12px",
                       }}
                     />
-                    <Legend 
-                      wrapperStyle={{ fontSize: "12px" }}
-                      iconType="circle"
-                    />
+                    <Legend wrapperStyle={{ fontSize: "12px" }} iconType="circle" />
                   </PieChart>
                 </div>
               </div>
@@ -329,12 +337,10 @@ const RosinPricePanel: React.FC = () => {
                 className="rounded-lg p-4 bg-white hover:shadow-lg transition-shadow duration-200"
                 style={{
                   boxShadow: "0 2px 4px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)",
-                  border: "1px solid rgba(0,0,0,0.05)"
+                  border: "1px solid rgba(0,0,0,0.05)",
                 }}
               >
-                <h3 className="text-base font-medium text-gray-800 mb-2">
-                  市场数据
-                </h3>
+                <h3 className="text-base font-medium text-gray-800 mb-2">市场数据</h3>
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-gray-200">
@@ -346,15 +352,9 @@ const RosinPricePanel: React.FC = () => {
                   <tbody>
                     {marketData.map((item, index) => (
                       <tr key={index} className="border-b border-gray-100">
-                        <td className="py-1.5 text-left text-gray-800">
-                          {item.name}
-                        </td>
-                        <td className="py-1.5 text-right text-gray-800">
-                          {item.price}
-                        </td>
-                        <td className="py-1.5 text-right text-blue-500">
-                          {item.change}
-                        </td>
+                        <td className="py-1.5 text-left text-gray-800">{item.name}</td>
+                        <td className="py-1.5 text-right text-gray-800">{item.price}</td>
+                        <td className="py-1.5 text-right text-blue-500">{item.change}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -364,7 +364,7 @@ const RosinPricePanel: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </MainPage>
   );
 };
 

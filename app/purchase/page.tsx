@@ -16,7 +16,7 @@ import {
   Pie,
   Cell,
 } from "recharts";
-import { DashboardSidebar } from "@/components/dashboard-sidebar";
+import MainPage from "@/components/mainPage";
 
 // Dummy data for demonstration
 const purchaseData = [
@@ -34,18 +34,17 @@ const monthlyData = [
 ];
 
 const operationData = [
-  { day: '周一', amount: 120, price: 2050 },
-  { day: '周二', amount: 150, price: 2100 },
-  { day: '周三', amount: 90, price: 1950 },
-  { day: '周四', amount: 130, price: 2000 },
-  { day: '周五', amount: 110, price: 2150 },
+  { day: "周一", amount: 120, price: 2050 },
+  { day: "周二", amount: 150, price: 2100 },
+  { day: "周三", amount: 90, price: 1950 },
+  { day: "周四", amount: 130, price: 2000 },
+  { day: "周五", amount: 110, price: 2150 },
 ];
 
 export default function PurchasePage() {
   return (
-    <div className="min-h-screen flex bg-white">
-      <DashboardSidebar />
-      <div className="flex-1 container mx-auto p-6 space-y-6">
+    <MainPage>
+      <div className="container mx-auto p-6 space-y-6">
         <h1 className="text-2xl font-bold text-gray-800">周采购面板</h1>
 
         <div className="grid grid-cols-12 gap-6">
@@ -71,17 +70,29 @@ export default function PurchasePage() {
                       <XAxis dataKey="name" stroke="#6b7280" />
                       <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
                       <YAxis yAxisId="right" orientation="right" stroke="#82ca9d" />
-                      <Tooltip 
+                      <Tooltip
                         contentStyle={{
-                          backgroundColor: 'white',
-                          border: '1px solid #e5e7eb',
-                          borderRadius: '8px',
-                          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                          backgroundColor: "white",
+                          border: "1px solid #e5e7eb",
+                          borderRadius: "8px",
+                          boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
                         }}
                       />
                       <Legend />
-                      <Bar yAxisId="left" dataKey="amount" name="采购量" fill="#8884d8" radius={[4, 4, 0, 0]} />
-                      <Bar yAxisId="right" dataKey="price" name="单价" fill="#82ca9d" radius={[4, 4, 0, 0]} />
+                      <Bar
+                        yAxisId="left"
+                        dataKey="amount"
+                        name="采购量"
+                        fill="#8884d8"
+                        radius={[4, 4, 0, 0]}
+                      />
+                      <Bar
+                        yAxisId="right"
+                        dataKey="price"
+                        name="单价"
+                        fill="#82ca9d"
+                        radius={[4, 4, 0, 0]}
+                      />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -98,33 +109,28 @@ export default function PurchasePage() {
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={monthlyData}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                      <XAxis 
-                        dataKey="name" 
+                      <XAxis
+                        dataKey="name"
                         stroke="#6b7280"
                         axisLine={false}
                         tickLine={false}
                         fontSize={12}
                       />
-                      <YAxis 
-                        stroke="#6b7280"
-                        axisLine={false}
-                        tickLine={false}
-                        fontSize={12}
-                      />
+                      <YAxis stroke="#6b7280" axisLine={false} tickLine={false} fontSize={12} />
                       <Tooltip
                         contentStyle={{
-                          backgroundColor: 'white',
-                          border: '1px solid #e5e7eb',
-                          borderRadius: '8px',
-                          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                          backgroundColor: "white",
+                          border: "1px solid #e5e7eb",
+                          borderRadius: "8px",
+                          boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
                         }}
                       />
-                      <Line 
-                        type="monotone" 
-                        dataKey="value" 
-                        stroke="#8884d8" 
+                      <Line
+                        type="monotone"
+                        dataKey="value"
+                        stroke="#8884d8"
                         strokeWidth={2}
-                        dot={{ fill: '#8884d8', strokeWidth: 2 }}
+                        dot={{ fill: "#8884d8", strokeWidth: 2 }}
                         activeDot={{ r: 6, strokeWidth: 0 }}
                       />
                     </LineChart>
@@ -146,18 +152,8 @@ export default function PurchasePage() {
                       <XAxis dataKey="name" />
                       <YAxis />
                       <Tooltip />
-                      <Line
-                        type="monotone"
-                        dataKey="amount"
-                        name="采购量"
-                        stroke="#8884d8"
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="price"
-                        name="单价"
-                        stroke="#82ca9d"
-                      />
+                      <Line type="monotone" dataKey="amount" name="采购量" stroke="#8884d8" />
+                      <Line type="monotone" dataKey="price" name="单价" stroke="#82ca9d" />
                       <Legend />
                     </LineChart>
                   </ResponsiveContainer>
@@ -182,10 +178,7 @@ export default function PurchasePage() {
                       <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
                           <Pie
-                            data={[
-                              data,
-                              { name: "Other", value: 1000 - data.value },
-                            ]}
+                            data={[data, { name: "Other", value: 1000 - data.value }]}
                             dataKey="value"
                             nameKey="name"
                             cx="50%"
@@ -194,11 +187,9 @@ export default function PurchasePage() {
                             fill="#8884d8"
                             label
                           >
-                            {[{ fill: "#0088FE" }, { fill: "#00C49F" }].map(
-                              (entry, index) => (
-                                <Cell key={`cell-${index}`} fill={entry.fill} />
-                              )
-                            )}
+                            {[{ fill: "#0088FE" }, { fill: "#00C49F" }].map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={entry.fill} />
+                            ))}
                           </Pie>
                           <Tooltip />
                         </PieChart>
@@ -220,7 +211,7 @@ export default function PurchasePage() {
               <CardContent className="py-3 px-4">
                 <div className="flex flex-col gap-2">
                   {operationData.map((item) => (
-                    <div 
+                    <div
                       key={item.day}
                       className="flex items-center justify-between p-2 rounded-lg bg-white/80 border border-gray-100 hover:shadow-sm transition-shadow"
                     >
@@ -235,15 +226,26 @@ export default function PurchasePage() {
                           </span>
                         </div>
                       </div>
-                      <div className={`w-1.5 h-1.5 rounded-full ${
-                        item.amount > 100 ? 'bg-green-500' : 'bg-yellow-500'
-                      }`} />
+                      <div
+                        className={`w-1.5 h-1.5 rounded-full ${
+                          item.amount > 100 ? "bg-green-500" : "bg-yellow-500"
+                        }`}
+                      />
                     </div>
                   ))}
                   <div className="mt-2 pt-2 border-t border-gray-100">
                     <div className="flex justify-between items-center text-xs text-gray-600">
-                      <span>周采购总量: {operationData.reduce((sum, item) => sum + item.amount, 0)}单位</span>
-                      <span>周平均单价: ¥{(operationData.reduce((sum, item) => sum + item.price, 0) / operationData.length).toFixed(0)}</span>
+                      <span>
+                        周采购总量: {operationData.reduce((sum, item) => sum + item.amount, 0)}
+                        单位
+                      </span>
+                      <span>
+                        周平均单价: ¥
+                        {(
+                          operationData.reduce((sum, item) => sum + item.price, 0) /
+                          operationData.length
+                        ).toFixed(0)}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -294,6 +296,6 @@ export default function PurchasePage() {
           </div>
         </div>
       </div>
-    </div>
+    </MainPage>
   );
 }

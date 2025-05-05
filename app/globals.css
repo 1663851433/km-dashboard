@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&display=swap');
 
 @layer base {
   :root {
@@ -33,6 +34,15 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 224.3 76.3% 48%;
+
+    --radius: 0.5rem;
+
+    /* 自定义颜色变量 */
+    --green: #a2ccb6;
+    --light-peach: #ffecd9;
+    --peach: #ee786e;
+    --sand: #fceeb5;
+    --white: #fff;
   }
 }
 
@@ -58,3 +68,6 @@
   border-radius: 8px;
   padding: 1rem;
 }
+
+/* 导入渐变卡片样式 */
+@import './styles/gradient-card.css';
