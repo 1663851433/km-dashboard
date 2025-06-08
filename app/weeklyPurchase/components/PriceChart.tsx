@@ -26,7 +26,7 @@ const data = [
 
 const PriceChart: React.FC = () => {
   return (
-    <Card className="shadow-md h-[425px] bg-[#ffecd9] border-none">
+    <Card className="shadow-md h-[425px] bg-white border-none">
       <CardHeader className="text-black">本周采购数量与下周预测</CardHeader>
       <div className="h-[300px]">
         <ResponsiveContainer width="100%" height="100%">

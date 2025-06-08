@@ -15,85 +15,79 @@ interface DataType {
 
 const columns: ColumnsType<DataType> = [
   {
-    title: '分公司',
-    dataIndex: 'company',
-    key: 'company',
+    title: "分公司",
+    dataIndex: "company",
+    key: "company",
   },
   {
-    title: '采购量',
-    dataIndex: 'purchaseVolume',
-    key: 'purchaseVolume',
+    title: "采购量",
+    dataIndex: "purchaseVolume",
+    key: "purchaseVolume",
   },
   {
-    title: '采购单价',
-    dataIndex: 'purchasePrice',
-    key: 'purchasePrice',
+    title: "采购单价",
+    dataIndex: "purchasePrice",
+    key: "purchasePrice",
   },
   {
-    title: '价格环比',
-    dataIndex: 'priceComparison',
-    key: 'priceComparison',
+    title: "价格环比",
+    dataIndex: "priceComparison",
+    key: "priceComparison",
   },
   {
-    title: '采购金额',
-    dataIndex: 'purchaseAmount',
-    key: 'purchaseAmount',
+    title: "采购金额",
+    dataIndex: "purchaseAmount",
+    key: "purchaseAmount",
   },
 ];
 
 const data: DataType[] = [
   {
-    key: '1',
-    company: '湖南',
-    purchaseVolume: '',
-    purchasePrice: '',
-    priceComparison: '',
-    purchaseAmount: '',
+    key: "1",
+    company: "湖南",
+    purchaseVolume: "0",
+    purchasePrice: "",
+    priceComparison: "",
+    purchaseAmount: "0",
   },
   {
-    key: '2',
-    company: '金安',
-    purchaseVolume: '',
-    purchasePrice: '',
-    priceComparison: '',
-    purchaseAmount: '',
+    key: "2",
+    company: "金安",
+    purchaseVolume: "0",
+    purchasePrice: "",
+    priceComparison: "",
+    purchaseAmount: "0",
   },
   {
-    key: '3',
-    company: '新茂',
-    purchaseVolume: '',
-    purchasePrice: '',
-    priceComparison: '',
-    purchaseAmount: '',
+    key: "3",
+    company: "新茂",
+    purchaseVolume: "0",
+    purchasePrice: "",
+    priceComparison: "",
+    purchaseAmount: "0",
   },
   {
-    key: '4',
-    company: '广西',
-    purchaseVolume: '',
-    purchasePrice: '',
-    priceComparison: '',
-    purchaseAmount: '',
+    key: "4",
+    company: "广西",
+    purchaseVolume: "0",
+    purchasePrice: "",
+    priceComparison: "",
+    purchaseAmount: "0",
   },
   {
-    key: '5',
-    company: '普源',
-    purchaseVolume: '',
-    purchasePrice: '',
-    priceComparison: '',
-    purchaseAmount: '',
+    key: "5",
+    company: "普洱",
+    purchaseVolume: "349.021",
+    purchasePrice: "5.55",
+    priceComparison: "",
+    purchaseAmount: "4476.612",
   },
 ];
 
 const PurchaseTable: React.FC = () => {
   return (
     <Card className="shadow-md">
-      <Table 
-        columns={columns} 
-        dataSource={data} 
-        pagination={false}
-        size="small"
-        bordered
-      />
+      <Table columns={columns} dataSource={data} pagination={false} size="small" bordered />
     </Card>
   );
 };

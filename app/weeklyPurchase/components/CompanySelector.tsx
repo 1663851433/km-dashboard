@@ -38,9 +38,9 @@ const CompanySelector: React.FC = () => {
               style={{ width: 120 }}
               options={[
                 { value: "all", label: "全部" },
-                { value: "songzhi", label: "松脂" },
-                { value: "songxiang", label: "松香" },
-                { value: "songyou", label: "松油" },
+                { value: "maweisong", label: "马尾松" },
+                { value: "shidisong", label: "湿地松" },
+                { value: "yunnansong", label: "云南松" },
               ]}
               suffixIcon={<DownOutlined />}
             />

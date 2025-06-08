@@ -37,7 +37,7 @@ const WeeklyPurchaseDashboard: React.FC = () => {
         {/* 右侧内容 */}
         <div className="lg:col-span-6 space-y-4">
           {/* 右上方指导价格卡片 */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             <GuidePriceCards />
           </div>
 

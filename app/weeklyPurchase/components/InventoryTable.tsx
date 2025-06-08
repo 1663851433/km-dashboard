@@ -96,8 +96,8 @@ const data: DataType[] = [
 
 const InventoryTable: React.FC = () => {
   return (
-    <Card className="shadow-md">
-      <Typography.Title level={2}>地区采购统计</Typography.Title>
+    <Card className="shadow-md h-[425px]">
+      <Typography.Title level={2}>分公司库存</Typography.Title>
       <Table columns={columns} dataSource={data} pagination={false} size="small" bordered />
     </Card>
   );

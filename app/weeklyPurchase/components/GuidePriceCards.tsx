@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Typography } from "antd";
-import { TrendingUp, Droplets } from "lucide-react";
+import { TrendingUp, Droplets, ArrowUpNarrowWide } from "lucide-react";
 
 const { Title, Text } = Typography;
 
@@ -12,7 +12,7 @@ interface GuidePriceCardProps {
 
 const GuidePriceCard: React.FC<GuidePriceCardProps> = ({ title, price, icon }) => {
   return (
-    <Card 
+    <Card
       className="shadow-lg border-2 border-[var(--sand)] hover:border-[var(--peach)] transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1"
       bodyStyle={{ padding: "16px" }}
     >
@@ -35,16 +35,9 @@ const GuidePriceCard: React.FC<GuidePriceCardProps> = ({ title, price, icon }) =
 const GuidePriceCards: React.FC = () => {
   return (
     <>
-      <GuidePriceCard 
-        title="松香采购指导价" 
-        price="10000" 
-        icon={<TrendingUp size={24} />} 
-      />
-      <GuidePriceCard 
-        title="松节油采购指导价" 
-        price="10000" 
-        icon={<Droplets size={24} />} 
-      />
+      <GuidePriceCard title="松脂指导价" price="5.7" icon={<ArrowUpNarrowWide size={24} />} />
+      <GuidePriceCard title="松香采购指导价" price="10000" icon={<TrendingUp size={24} />} />
+      <GuidePriceCard title="松节油采购指导价" price="10000" icon={<Droplets size={24} />} />
     </>
   );
 };
