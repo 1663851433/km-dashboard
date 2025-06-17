@@ -5,11 +5,11 @@ import { cn } from "@/lib/utils";
 import { Card, Col, Divider, Row, Typography } from "antd";
 
 const mockData = [
-  { label: "马尾松", value: 79, trend: -8.04 },
-  { label: "湿地松", value: 3286, trend: -24.04 },
-  { label: "云南松", value: 35, trend: 23.35 },
-  { label: "巴西", value: 366 },
-  { label: "越南", value: 1372 },
+  { label: "马尾松", value: 9550, trend: -8.04 },
+  { label: "湿地松", value: 9400, trend: -24.04 },
+  { label: "云南松", value: 10800, trend: 23.35 },
+  { label: "巴西湿地松", value: 10700 },
+  { label: "印尼", value: 10500 },
 ];
 
 export default function PineCore() {
