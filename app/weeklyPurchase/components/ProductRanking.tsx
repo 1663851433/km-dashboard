@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/src/utils/utils";
 import { Card, Progress, Typography } from "antd";
 
 const data = [

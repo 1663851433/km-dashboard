@@ -1,8 +1,9 @@
 "use client";
 
-import { CATEGORY_ONE } from "@/lib/constants";
 import { Button, Card, DatePicker, Form, Select } from "antd";
 import dayjs from "dayjs";
+
+import { CATEGORY_ONE } from "@/src/lib/constants";
 
 export default function QuerySection() {
   const [form] = Form.useForm<{ category: string; date: string[] }>();

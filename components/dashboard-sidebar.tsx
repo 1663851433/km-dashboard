@@ -1,26 +1,26 @@
 "use client";
 
-import { Home, BarChart, ChevronRight, Backpack } from "lucide-react";
+import { BarChart, ChevronRight, DollarSign, Handshake, Home, ShoppingCart } from "lucide-react";
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import {
+  TooltipContent,
   TooltipProvider,
   TooltipRoot,
   TooltipTrigger,
-  TooltipContent,
 } from "@/components/ui/tooltip";
+import { cn } from "@/src/utils/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/", icon: Home, label: "主页" },
   { href: "/purchase", icon: BarChart, label: "周采购面板汇总" },
-  { href: "/rosinPrice", icon: Backpack, label: "松香价格面板" },
-  { href: "/artificialCollection", icon: Backpack, label: "人工收集" },
-  { href: "/weeklyPurchase", icon: Backpack, label: "周采购面板" },
-  // { href: "/users", icon: Users, label: "用户管理" },
-  // { href: "/settings", icon: Settings, label: "系统设置" },
+  { href: "/rosinPrice", icon: DollarSign, label: "松香价格面板" },
+  { href: "/artificialCollection", icon: Handshake, label: "人工收集" },
+  { href: "/weeklyPurchase", icon: ShoppingCart, label: "周采购面板" },
+  { href: "/weeklyPurchaseOld", icon: ShoppingCart, label: "周采购面板(旧)" },
 ];
 
 export function DashboardSidebar({ className }: { className?: string }) {

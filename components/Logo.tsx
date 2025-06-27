@@ -1,8 +1,9 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import Logo from "@/src/assets/img/logo.png";
+import { cn } from "@/src/utils/utils";
 import { useRouter } from "next/navigation";
+
+import Logo from "@/src/assets/img/logo.png";
 
 export default ({ className, ...props }: { className?: string }) => {
   const router = useRouter();

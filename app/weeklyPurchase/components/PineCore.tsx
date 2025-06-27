@@ -1,7 +1,7 @@
 /**
  * @description 松树核心指标内容
  */
-import { cn } from "@/lib/utils";
+import { cn } from "@/src/utils/utils";
 import { Card, Col, Divider, Row, Typography } from "antd";
 
 const mockData = [

@@ -1,9 +1,10 @@
-import { DashboardSidebar } from "@/components/dashboard-sidebar";
-import { cn } from "@/lib/utils";
+import { CSSProperties } from "react";
+
 import Header from "@/components/Header";
+import { DashboardSidebar } from "@/components/dashboard-sidebar";
+import { cn } from "@/src/utils/utils";
 
 import BgMain from "@/src/assets/img/bg-main.jpg";
-import { CSSProperties } from "react";
 
 const MainPage = ({
   className,

@@ -1,26 +1,46 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '';
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
-export async function fetchData<T>(endpoint: string, options?: RequestInit): Promise<T> {
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    ...options,
-  });
+const API_BASE_URL = "";
 
-  if (!response.ok) {
-    throw new Error(`API Error: ${response.statusText}`);
+const instance = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  timeout: 1000 * 30,
+});
+
+// 在此添加请求/响应拦截器
+// instance.interceptors.request.use(config => { ... });
+// instance.interceptors.response.use(response => { ... });
+
+export const axiosInstance = {
+  get: async <T>(url: string, config?: AxiosRequestConfig): Promise<T> => {
+    const res: AxiosResponse<T> = await instance.get(url, config);
+    return res.data;
+  },
+  post: async <T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> => {
+    const res: AxiosResponse<T> = await instance.post(url, data, config);
+    return res.data;
+  },
+  put: async <T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> => {
+    const res: AxiosResponse<T> = await instance.put(url, data, config);
+    return res.data;
+  },
+  delete: async <T>(url: string, config?: AxiosRequestConfig): Promise<T> => {
+    const res: AxiosResponse<T> = await instance.delete(url, config);
+    return res.data;
+  },
+};
+
+class ApiService {
+  /**
+   * 获取摘要数据
+   * @param params 请求参数
+   */
+  async getSummaryData(params: Record<string, any>) {
+    return axiosInstance.post("/api/getSummary", params);
   }
-
-  return response.json();
 }
 
-export const api = {
-  get: <T>(endpoint: string) => fetchData<T>(endpoint),
-  post: <T>(endpoint: string, data: Record<string,{}>) =>
-    fetchData<T>(endpoint, {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }),
-  // Add other methods as needed
-}; 
+export const api = new ApiService();
