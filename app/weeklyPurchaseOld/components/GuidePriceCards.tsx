@@ -1,6 +1,9 @@
+import { ArrowUpNarrowWide, Droplets, TrendingUp } from "lucide-react";
 import React from "react";
+
 import { Card, Typography } from "antd";
-import { TrendingUp, Droplets, ArrowUpNarrowWide } from "lucide-react";
+
+import { useWeeklyDashboardStores } from "@/src/stores/useWeeklyDashboardStores";
 
 const { Title, Text } = Typography;
 
@@ -14,7 +17,7 @@ const GuidePriceCard: React.FC<GuidePriceCardProps> = ({ title, price, icon }) =
   return (
     <Card
       className="shadow-lg border-2 border-[var(--sand)] hover:border-[var(--peach)] transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1"
-      bodyStyle={{ padding: "16px" }}
+      styles={{ body: { padding: "16px" } }}
     >
       <div className="flex items-center justify-between">
         <div>
@@ -33,11 +36,24 @@ const GuidePriceCard: React.FC<GuidePriceCardProps> = ({ title, price, icon }) =
 };
 
 const GuidePriceCards: React.FC = () => {
+  const suggestedPrice = useWeeklyDashboardStores((state) => state.suggestedPrice);
   return (
     <>
-      <GuidePriceCard title="松脂指导价" price="5.7" icon={<ArrowUpNarrowWide size={24} />} />
-      <GuidePriceCard title="松香采购指导价" price="10000" icon={<TrendingUp size={24} />} />
-      <GuidePriceCard title="松节油采购指导价" price="10000" icon={<Droplets size={24} />} />
+      <GuidePriceCard
+        title="松脂指导价"
+        price={suggestedPrice.rosin.toFixed(2)}
+        icon={<ArrowUpNarrowWide size={24} />}
+      />
+      <GuidePriceCard
+        title="松香采购指导价"
+        price={suggestedPrice.colophony.toFixed(2)}
+        icon={<TrendingUp size={24} />}
+      />
+      <GuidePriceCard
+        title="松节油采购指导价"
+        price={suggestedPrice.pineTar.toFixed(2)}
+        icon={<Droplets size={24} />}
+      />
     </>
   );
 };

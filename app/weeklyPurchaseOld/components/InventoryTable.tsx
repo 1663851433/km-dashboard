@@ -1,6 +1,9 @@
 import React from "react";
-import { Table, Card, Typography } from "antd";
+
+import { Card, Table, Typography } from "antd";
 import type { ColumnsType } from "antd/es/table";
+
+import { useWeeklyDashboardStores } from "@/src/stores/useWeeklyDashboardStores";
 
 interface DataType {
   key: string;
@@ -21,28 +24,28 @@ const columns: ColumnsType<DataType> = [
   },
   {
     title: "金安",
-    dataIndex: "jinan",
-    key: "jinan",
+    dataIndex: "金安",
+    key: "金安",
   },
   {
     title: "新茂",
-    dataIndex: "xinmao",
-    key: "xinmao",
+    dataIndex: "新茂",
+    key: "新茂",
   },
   {
     title: "湖南",
-    dataIndex: "hunan",
-    key: "hunan",
+    dataIndex: "新茂",
+    key: "新茂",
   },
   {
     title: "广西",
-    dataIndex: "guangxi",
-    key: "guangxi",
+    dataIndex: "新茂",
+    key: "新茂",
   },
   {
     title: "普源",
-    dataIndex: "puyuan",
-    key: "puyuan",
+    dataIndex: "新茂",
+    key: "新茂",
   },
   {
     title: "封存",
@@ -51,54 +54,19 @@ const columns: ColumnsType<DataType> = [
   },
 ];
 
-const data: DataType[] = [
-  {
-    key: "1",
-    product: "松脂",
-    jinan: 4094.63,
-    xinmao: 2698.22,
-    hunan: 3284.97,
-    guangxi: 271.99,
-    puyuan: 1011.0,
-    sealed: 0.0,
-  },
-  {
-    key: "2",
-    product: "松香",
-    jinan: 516.97,
-    xinmao: 2536.22,
-    hunan: 2559.4,
-    guangxi: 4375.85,
-    puyuan: 580.08,
-    sealed: 400.0,
-  },
-  {
-    key: "3",
-    product: "松节油",
-    jinan: 462.0,
-    xinmao: 202.1,
-    hunan: 690.96,
-    guangxi: 394.46,
-    puyuan: 550.0,
-    sealed: 0.0,
-  },
-  {
-    key: "4",
-    product: "树脂",
-    jinan: 0,
-    xinmao: 134.15,
-    hunan: 0.0,
-    guangxi: 0,
-    puyuan: 0,
-    sealed: 0,
-  },
-];
-
 const InventoryTable: React.FC = () => {
+  const branchInventory = useWeeklyDashboardStores((state) => state.branchInventory);
+
   return (
     <Card className="shadow-md h-[425px]">
       <Typography.Title level={2}>分公司库存</Typography.Title>
-      <Table columns={columns} dataSource={data} pagination={false} size="small" bordered />
+      <Table
+        columns={columns}
+        dataSource={branchInventory}
+        pagination={false}
+        size="small"
+        bordered
+      />
     </Card>
   );
 };

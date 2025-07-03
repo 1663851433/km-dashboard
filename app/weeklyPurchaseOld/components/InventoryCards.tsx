@@ -1,16 +1,10 @@
-import React, { useState } from "react";
+import { Clock, Droplets, Package } from "lucide-react";
+import React, { useEffect, useMemo, useState } from "react";
+
 import { Card, Typography } from "antd";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
-import { Package, Droplets, Clock } from "lucide-react";
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+
+import { useWeeklyDashboardStores } from "@/src/stores/useWeeklyDashboardStores";
 
 const { Title, Text } = Typography;
 
@@ -31,7 +25,7 @@ const songyouRealtimeData = [
 
 interface InventoryCardProps {
   title: string;
-  value: string;
+  value: string | number;
   chartData: any[];
   icon: React.ReactNode;
   color: string;
@@ -90,16 +84,17 @@ const InventoryCard: React.FC<InventoryCardProps> = ({ title, value, chartData, 
               }}
             />
             <Bar
-              dataKey="数量"
+              dataKey="inventory"
               fill={
                 color.includes("green")
                   ? "var(--green)"
                   : color.includes("blue")
-                  ? "var(--peach)"
-                  : "var(--sand)"
+                    ? "var(--peach)"
+                    : "var(--sand)"
               }
               radius={[4, 4, 0, 0]}
               animationDuration={1500}
+              name="库存"
             />
           </BarChart>
         </ResponsiveContainer>
@@ -116,26 +111,78 @@ const InventoryCard: React.FC<InventoryCardProps> = ({ title, value, chartData, 
 };
 
 const InventoryCards: React.FC = () => {
+  const inventory = useWeeklyDashboardStores((state) => state.inventory);
+
+  const parseInventoryStore = useMemo(() => {
+    const { curWeek = [], lastWeek = [] } = inventory || {};
+
+    // 计算每种类型的合计，保留两位小数
+    const sum = (arr: any[], key: string) =>
+      parseFloat(arr.reduce((sum, cur) => sum + parseFloat(cur?.[key] ?? 0), 0).toFixed(2));
+
+    return {
+      rosin: {
+        curWeek: sum(curWeek, "rosin"),
+        lastWeek: sum(lastWeek, "rosin"),
+      },
+      colophony: {
+        curWeek: sum(curWeek, "colophony"),
+        lastWeek: sum(lastWeek, "colophony"),
+      },
+      pineTar: {
+        curWeek: sum(curWeek, "pineTar"),
+        lastWeek: sum(lastWeek, "pineTar"),
+      },
+    };
+  }, [inventory]);
+
   return (
     <>
       <InventoryCard
         title="松脂库存"
-        value="10968"
-        chartData={songyouData}
+        value={parseInventoryStore.rosin.curWeek}
+        chartData={[
+          {
+            name: "本周",
+            inventory: parseInventoryStore.rosin.curWeek,
+          },
+          {
+            name: "上周",
+            inventory: parseInventoryStore.rosin.lastWeek,
+          },
+        ]}
         icon={<Droplets size={20} />}
         color="border-green-500"
       />
       <InventoryCard
         title="松香库存"
-        value="11358"
-        chartData={songxiangData}
+        value={parseInventoryStore.colophony.curWeek}
+        chartData={[
+          {
+            name: "本周",
+            inventory: parseInventoryStore.colophony.curWeek,
+          },
+          {
+            name: "上周",
+            inventory: parseInventoryStore.colophony.lastWeek,
+          },
+        ]}
         icon={<Package size={20} />}
         color="border-green-500"
       />
       <InventoryCard
         title="松节油库存"
-        value="2399"
-        chartData={songyouRealtimeData}
+        value={parseInventoryStore.pineTar.curWeek}
+        chartData={[
+          {
+            name: "本周",
+            inventory: parseInventoryStore.pineTar.curWeek,
+          },
+          {
+            name: "上周",
+            inventory: parseInventoryStore.pineTar.lastWeek,
+          },
+        ]}
         icon={<Clock size={20} />}
         color="border-green-500"
       />

@@ -1,12 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Card, CardContent } from "@/components/ui/card";
+import { api } from "@/src/services/api";
 import { DownOutlined } from "@ant-design/icons";
 import { Button, Select, Typography } from "antd";
+
+import { useWeeklyDashboardStores } from "@/src/stores/useWeeklyDashboardStores";
 
 const { Text } = Typography;
 
 const CompanySelector: React.FC = () => {
+  const queryParams = useWeeklyDashboardStores((state) => state.queryParams);
+  const weeklyStoreUpdateFn = useWeeklyDashboardStores((state) => state.updateState);
+
+  const handleQuery = async (params?: any) => {
+    weeklyStoreUpdateFn({ pageLoading: true });
+
+    let res = await api.getSummaryData(params || queryParams);
+
+    weeklyStoreUpdateFn({ pageLoading: false });
+
+    if (res.status == "200") {
+      // parse预测数据 - currentAndNextWeekForecast
+      let { currentAndNextWeekForecast: resCurrentAndNextWeekForecast } = res.data;
+
+      weeklyStoreUpdateFn({
+        summaryData: {
+          rosinTotal: res.data.rosinTotal,
+          purchaseUnitPrice: res.data.purchaseUnitPrice,
+          purchaseAmount: res.data.purchaseAmount,
+        },
+        subCompanyData: res.data.subCompanyData || [],
+        currentAndNextWeekForecast: {
+          curWeek: resCurrentAndNextWeekForecast.curWeek?.map((item: any) => item.purchaseQty),
+          nextWeek: resCurrentAndNextWeekForecast.nextWeek?.map((item: any) => item.purchaseQty),
+        },
+        suggestedPrice: res.data.suggestedPrice,
+        inventory: res.data.inventory,
+        branchInventory: res.data.branchInventory,
+      });
+    }
+  };
+
+  useEffect(() => {
+    let initDate = useWeeklyDashboardStores.getState().queryParams;
+    handleQuery(initDate);
+  }, []);
+
   return (
     <>
       <Card className="gradient-card h-full">
@@ -15,17 +55,28 @@ const CompanySelector: React.FC = () => {
             <Text className="font-medium text-white">分公司</Text>
             <div className="flex items-center gap-2">
               <Select
-                defaultValue="all"
+                defaultValue=""
                 style={{ width: 120 }}
                 options={[
-                  { value: "all", label: "全部" },
-                  { value: "hunan", label: "湖南" },
-                  { value: "jinan", label: "金安" },
-                  { value: "xinmao", label: "新茂" },
-                  { value: "guangxi", label: "广西" },
-                  { value: "puyuan", label: "普源" },
+                  { value: "", label: "全部" },
+                  { value: "湖南", label: "湖南" },
+                  { value: "金安", label: "金安" },
+                  { value: "新茂", label: "新茂" },
+                  { value: "广西", label: "广西" },
+                  { value: "普源", label: "普源" },
                 ]}
                 suffixIcon={<DownOutlined />}
+                value={queryParams.branch}
+                onChange={(val) => {
+                  // console.log("company onChange", val);
+                  // setCompany(val);
+                  weeklyStoreUpdateFn({
+                    queryParams: {
+                      ...queryParams,
+                      branch: val,
+                    },
+                  });
+                }}
               />
             </div>
           </div>
@@ -47,7 +98,9 @@ const CompanySelector: React.FC = () => {
             </div>
           </div>
 
-          <Button type="primary">查询</Button>
+          <Button type="primary" onClick={() => handleQuery()}>
+            查询
+          </Button>
         </CardContent>
       </Card>
 

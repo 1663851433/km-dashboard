@@ -38,8 +38,12 @@ class ApiService {
    * 获取摘要数据
    * @param params 请求参数
    */
-  async getSummaryData(params: Record<string, any>) {
-    return axiosInstance.post("/api/getSummary", params);
+  async getSummaryData(params: Record<string, any>): Promise<any> {
+    try {
+      return axiosInstance.post("/api/getSummary", { ...params });
+    } catch (error) {
+      return console.error(error);
+    }
   }
 }
 

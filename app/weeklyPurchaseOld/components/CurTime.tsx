@@ -1,12 +1,19 @@
+import { ChevronDown } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+
+import { getWeekRange } from "@/src/utils/utils";
 import { Card, DatePicker } from "antd";
 import dayjs from "dayjs";
 import weekOfYear from "dayjs/plugin/weekOfYear";
-import { useMemo, useState } from "react";
-import { ChevronDown } from "lucide-react";
+
+import { useWeeklyDashboardStores } from "@/src/stores/useWeeklyDashboardStores";
 
 dayjs.extend(weekOfYear);
 
 export default () => {
+  const weeklyDashboardStore = useWeeklyDashboardStores();
+  const queryParams = useWeeklyDashboardStores((state) => state.queryParams);
+
   const [panelVisible, setPanelVisible] = useState(false);
   const [curDate, setCurDate] = useState<dayjs.Dayjs>(dayjs());
 
@@ -19,6 +26,18 @@ export default () => {
     // Can not select days before today and today
     return current && current > dayjs().endOf("day");
   };
+
+  useEffect(() => {
+    const { startTime, endTime } = getWeekRange(curDate.toDate());
+
+    weeklyDashboardStore.updateState({
+      queryParams: {
+        ...queryParams,
+        startTime,
+        endTime,
+      },
+    });
+  }, [curDate]);
 
   return (
     <Card className="shadow-sm border border-gray-200">
