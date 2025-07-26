@@ -45,6 +45,24 @@ class ApiService {
       return console.error(error);
     }
   }
+
+  /**
+   * 导入周数据
+   * @param file Excel 文件
+   */
+  async importWeeklyData(file: File): Promise<any> {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      return axiosInstance.post("/api/uploadWeeklyData", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+    } catch (error) {
+      return console.error(error);
+    }
+  }
 }
 
 export const api = new ApiService();

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { api } from "@/src/services/api";
-import { DownOutlined } from "@ant-design/icons";
-import { Button, Select, Typography } from "antd";
+import { DownOutlined, UploadOutlined } from "@ant-design/icons";
+import { Button, Select, Typography, Upload, notification } from "antd";
 
 import { useWeeklyDashboardStores } from "@/src/stores/useWeeklyDashboardStores";
 
@@ -40,6 +40,22 @@ const CompanySelector: React.FC = () => {
         branchInventory: res.data.branchInventory,
       });
     }
+  };
+
+  const handleImport = async (file: File) => {
+    let res = await api.importWeeklyData(file);
+
+    if (res.code == "200") {
+      notification.success({
+        message: "导入成功",
+      });
+    } else {
+      notification.error({
+        message: "导入失败",
+      });
+    }
+
+    return false;
   };
 
   useEffect(() => {
@@ -98,9 +114,17 @@ const CompanySelector: React.FC = () => {
             </div>
           </div>
 
-          <Button type="primary" onClick={() => handleQuery()}>
-            查询
-          </Button>
+          <div>
+            <Button type="primary" onClick={() => handleQuery()}>
+              查 询
+            </Button>
+            &emsp;
+            <Upload accept=".xlsx,.xls" beforeUpload={handleImport} fileList={[]}>
+              <Button icon={<UploadOutlined />} type="dashed">
+                导 入
+              </Button>
+            </Upload>
+          </div>
         </CardContent>
       </Card>
 
