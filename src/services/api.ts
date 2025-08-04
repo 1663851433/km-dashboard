@@ -63,6 +63,17 @@ class ApiService {
       return console.error(error);
     }
   }
+
+  /**
+   * 下载周数据模板
+   */
+  async downloadWeeklyData(): Promise<any> {
+    try {
+      return axiosInstance.get("/api/download/WeeklyDataModel");
+    } catch (error) {
+      return console.error(error);
+    }
+  }
 }
 
 export const api = new ApiService();
