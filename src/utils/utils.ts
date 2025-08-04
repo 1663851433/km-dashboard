@@ -37,3 +37,38 @@ export function getWeekRange(date: Date | string | number) {
     endTime: format(sunday),
   };
 }
+
+/**
+ * @description 格式化数字为带单位的字符串（如 1.2k、99k+、1.2M、99M+）
+ * @param num 需要格式化的数字
+ * @returns string 格式化后的字符串
+ */
+export function formatNumberWithUnit(num: number): string {
+  const K = 1000;
+  const M = 1000000;
+
+  // 处理小于 1000 的情况
+  if (num < K) {
+    return num.toString();
+  }
+
+  // 处理 1k 到 99k 的情况
+  if (num < 100 * K) {
+    const value = (num / K).toFixed(1);
+    return `${value}k`;
+  }
+
+  // 处理超过 99k 但未达到 1M 的情况
+  if (num < M) {
+    return "99k+";
+  }
+
+  // 处理 1M 到 99M 的情况
+  if (num < 100 * M) {
+    const value = (num / M).toFixed(1);
+    return `${value}M`;
+  }
+
+  // 处理超过 99M 的情况
+  return "99M+";
+}
