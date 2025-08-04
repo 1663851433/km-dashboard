@@ -29,7 +29,7 @@ const WeeklyPurchaseDashboard: FC = () => {
   return (
     <div className="p-4 space-y-4 w-full h-full overflow-auto relative">
       {/* 悬浮下载按钮 */}
-      <div className="fixed top-[100px] right-[20px] z-50">
+      {/* <div className="fixed top-[100px] right-[20px] z-50">
         <Button
           type="primary"
           icon={<DownloadOutlined />}
@@ -47,7 +47,7 @@ const WeeklyPurchaseDashboard: FC = () => {
             boxShadow: "0 4px 12px rgba(24, 144, 255, 0.3)",
           }}
         />
-      </div>
+      </div> */}
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         {/* 左侧内容 */}

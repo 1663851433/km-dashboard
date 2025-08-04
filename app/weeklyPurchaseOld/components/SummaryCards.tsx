@@ -49,7 +49,7 @@ const SummaryCards: React.FC = () => {
 
       <Card className="border-2 border-blue-500 shadow-md" styles={{ body: { padding: "12px" } }}>
         <div className="text-center">
-          <Text className="text-gray-600 text-sm">采购金额</Text>
+          <Text className="text-gray-600 text-sm">本周采购金额</Text>
           <div className="flex items-center justify-center gap-2">
             <Wallet className="text-blue-500" size={24} />
             <Title

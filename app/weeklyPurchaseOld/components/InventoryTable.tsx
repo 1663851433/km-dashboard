@@ -48,7 +48,7 @@ const columns: ColumnsType<DataType> = [
     key: "新茂",
   },
   {
-    title: "封存",
+    title: "封开",
     dataIndex: "sealed",
     key: "sealed",
   },
