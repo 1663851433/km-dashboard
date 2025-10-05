@@ -2,7 +2,9 @@
 
 import { FC } from "react";
 
-import { Col, Row, Spin } from "antd";
+import { api } from "@/src/services/api";
+import { DownloadOutlined } from "@ant-design/icons";
+import { Button, Col, Row, Spin } from "antd";
 
 import { useWeeklyDashboardStores } from "@/src/stores/useWeeklyDashboardStores";
 
@@ -18,8 +20,35 @@ import SummaryCards from "./SummaryCards";
 // dashboard容器
 const WeeklyPurchaseDashboard: FC = () => {
   const pageLoading = useWeeklyDashboardStores((state) => state.pageLoading);
+
+  // 模板下载功能
+  const handleDownloadTemplate = async () => {
+    api.downloadWeeklyData();
+  };
+
   return (
-    <div className="p-4 space-y-4 w-full h-full overflow-auto">
+    <div className="p-4 space-y-4 w-full h-full overflow-auto relative">
+      {/* 悬浮下载按钮 */}
+      {/* <div className="fixed top-[100px] right-[20px] z-50">
+        <Button
+          type="primary"
+          icon={<DownloadOutlined />}
+          onClick={handleDownloadTemplate}
+          className="shadow-lg hover:shadow-xl transition-shadow duration-300"
+          style={{
+            borderRadius: "50%",
+            width: "56px",
+            height: "56px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "#1890ff",
+            border: "none",
+            boxShadow: "0 4px 12px rgba(24, 144, 255, 0.3)",
+          }}
+        />
+      </div> */}
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         {/* 左侧内容 */}
         <div className="lg:col-span-6 space-y-4">

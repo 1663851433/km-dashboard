@@ -79,7 +79,7 @@ const CompanySelector: React.FC = () => {
                   { value: "金安", label: "金安" },
                   { value: "新茂", label: "新茂" },
                   { value: "广西", label: "广西" },
-                  { value: "普源", label: "普源" },
+                  { value: "普洱", label: "普洱" },
                 ]}
                 suffixIcon={<DownOutlined />}
                 value={queryParams.branch}

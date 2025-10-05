@@ -27,7 +27,7 @@ const columns: ColumnsType<any> = [
     key: "priceChange",
   },
   {
-    title: "采购金额",
+    title: "本周采购金额",
     dataIndex: "purchaseAmount",
     key: "purchaseAmount",
   },
