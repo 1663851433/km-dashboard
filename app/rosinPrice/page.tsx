@@ -1,22 +1,23 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import {
-  LineChart,
-  Line,
-  BarChart,
-  Bar,
-  PieChart,
-  Pie,
-  Cell,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-} from "recharts";
+import React, { useEffect, useState } from "react";
+
 import { DashboardSidebar } from "@/components/dashboard-sidebar";
 import MainPage from "@/components/mainPage";
 import dayjs from "dayjs";
+import {
+  Bar,
+  BarChart,
+  Cell,
+  Legend,
+  Line,
+  LineChart,
+  Pie,
+  PieChart,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 const dataLine = [
   { name: "2/28/24", price: 8800, region1: 8800, region2: 8850, region3: 8900 },
@@ -56,6 +57,10 @@ const marketData = [
 
 const COLORS = ["#FFBB28", "#FF8042", "#0088FE"];
 
+/**
+ * @description 松香价格面板
+ * @returns
+ */
 const RosinPricePanel: React.FC = () => {
   const [mounted, setMounted] = useState(false);
 
@@ -89,41 +94,60 @@ const RosinPricePanel: React.FC = () => {
             </div>
           </div>
 
-          {/* 价格指标卡片 */}
-          <div className="flex gap-3 mb-4 px-2">
-            <div
-              className="flex-1 rounded-lg p-4 bg-white hover:shadow-lg transition-shadow duration-200"
-              style={{
-                boxShadow: "0 2px 4px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)",
-                border: "1px solid rgba(0,0,0,0.05)",
-              }}
-            >
-              <h2 className="text-gray-500 mb-1 text-sm">7天内高价</h2>
-              <p className="text-2xl font-bold text-gray-800">9800</p>
+          <div className="flex items-center gap-4">
+            <div className="flex-1 mb-4 rounded-lg py-4 border border-[#8d7546] hover:shadow-lg transition-shadow duration-200 grid grid-cols-3">
+              <div className="text-center">
+                <h2 className="text-gray-950 mb-1 text-sm">越南湿地松</h2>
+                <p className="text-2xl font-bold text-[#8d7546]">700</p>
+              </div>
+
+              <div className="text-center border-l border-l-[#8d7546]">
+                <h2 className="text-gray-950 mb-1 text-sm">印尼</h2>
+                <p className="text-2xl font-bold text-[#8d7546]">600</p>
+              </div>
+
+              <div className="text-center border-l border-l-[#8d7546]">
+                <h2 className="text-gray-950 mb-1 text-sm">巴西</h2>
+                <p className="text-2xl font-bold text-[#8d7546]">80</p>
+              </div>
             </div>
-            <div
-              className="flex-1 rounded-lg p-4 bg-white hover:shadow-lg transition-shadow duration-200"
-              style={{
-                boxShadow: "0 2px 4px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)",
-                border: "1px solid rgba(0,0,0,0.05)",
-              }}
-            >
-              <h2 className="text-gray-500 mb-1 text-sm">7天内低价</h2>
-              <p className="text-2xl font-bold text-gray-800">10000</p>
-            </div>
-            <div
-              className="flex-1 rounded-lg p-4 bg-white hover:shadow-lg transition-shadow duration-200"
-              style={{
-                boxShadow: "0 2px 4px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)",
-                border: "1px solid rgba(0,0,0,0.05)",
-              }}
-            >
-              <h2 className="text-gray-500 mb-1 text-sm">采购均价市场均价差</h2>
-              <p className="text-2xl font-bold text-gray-800">150</p>
+
+            {/* 价格指标卡片 */}
+            <div className="flex-1 flex gap-3 mb-4">
+              <div
+                className="flex-1 rounded-lg p-4 bg-white hover:shadow-lg transition-shadow duration-200"
+                style={{
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)",
+                  border: "1px solid rgba(0,0,0,0.05)",
+                }}
+              >
+                <h2 className="text-gray-500 mb-1 text-sm">7天内高价</h2>
+                <p className="text-2xl font-bold text-gray-800">9800</p>
+              </div>
+              <div
+                className="flex-1 rounded-lg p-4 bg-white hover:shadow-lg transition-shadow duration-200"
+                style={{
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)",
+                  border: "1px solid rgba(0,0,0,0.05)",
+                }}
+              >
+                <h2 className="text-gray-500 mb-1 text-sm">7天内低价</h2>
+                <p className="text-2xl font-bold text-gray-800">10000</p>
+              </div>
+              <div
+                className="flex-1 rounded-lg p-4 bg-white hover:shadow-lg transition-shadow duration-200"
+                style={{
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)",
+                  border: "1px solid rgba(0,0,0,0.05)",
+                }}
+              >
+                <h2 className="text-gray-500 mb-1 text-sm">采购均价市场均价差</h2>
+                <p className="text-2xl font-bold text-gray-800">150</p>
+              </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 px-2">
+          <div className="grid grid-cols-2 gap-4">
             <div
               className="rounded-lg p-4 bg-white hover:shadow-lg transition-shadow duration-200"
               style={{
