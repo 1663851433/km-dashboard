@@ -74,6 +74,17 @@ class ApiService {
       return console.error(error);
     }
   }
+
+  /**
+   * 获取松香面板价格
+   */
+  async getResoinPriceApi(data: { currentDate: string }): Promise<any> {
+    try {
+      return axiosInstance.post("/api/getResoinPrice", data);
+    } catch (error) {
+      return null;
+    }
+  }
 }
 
 export const api = new ApiService();

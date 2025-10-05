@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
-import { DashboardSidebar } from "@/components/dashboard-sidebar";
 import MainPage from "@/components/mainPage";
+import { api } from "@/src/services/api";
+import { DatePicker, Spin } from "antd";
 import dayjs from "dayjs";
 import {
   Bar,
@@ -18,6 +19,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+
+import { ResoinPriceData } from "./types";
 
 const dataLine = [
   { name: "2/28/24", price: 8800, region1: 8800, region2: 8850, region3: 8900 },
@@ -62,15 +65,35 @@ const COLORS = ["#FFBB28", "#FF8042", "#0088FE"];
  * @returns
  */
 const RosinPricePanel: React.FC = () => {
-  const [mounted, setMounted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [panelVisible, setPanelVisible] = useState(false);
+  const [curDate, setCurDate] = useState<dayjs.Dayjs>(dayjs());
+  const [resoinPriceData, setResoinPriceData] = useState<ResoinPriceData>();
+
+  const disabledDate = (current: any) => {
+    return current && current > dayjs().endOf("day");
+  };
+
+  const sevenDayDate = useMemo(() => {
+    return `${dayjs(curDate).subtract(7, "day").format("MM/DD")}-${dayjs(curDate).format("MM/DD")}`;
+  }, [curDate]);
+
+  const getRosinPriceData = async (queryDate: dayjs.Dayjs) => {
+    setLoading(true);
+    const res = await api.getResoinPriceApi({ currentDate: dayjs(queryDate).format("YYYY-MM-DD") });
+
+    if (res && res.status == "200") {
+      setResoinPriceData(res.data);
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
+    if (curDate) {
+      getRosinPriceData(curDate);
+    }
+  }, [curDate]);
 
   return (
     <MainPage>
@@ -88,9 +111,32 @@ const RosinPricePanel: React.FC = () => {
                 松香价格面板
               </h1>
             </div>
-            <div className="flex items-center gap-2">
+            <div
+              className="flex items-center gap-2 relative"
+              onClick={() => {
+                setPanelVisible(true);
+              }}
+            >
               <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-              <span className="text-lg text-gray-600">{dayjs().format("YYYY-MM-DD")}</span>
+              <div className="text-lg text-gray-600 ">{dayjs(curDate).format("YYYY-MM-DD")}</div>
+              <div
+                className="absolute w-0 h-0 overflow-hidden top-0"
+                style={{
+                  insetInlineStart: 0,
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
+                <DatePicker
+                  open={panelVisible}
+                  disabledDate={disabledDate}
+                  onChange={(date) => {
+                    setCurDate(date);
+                    setPanelVisible(false);
+                  }}
+                />
+              </div>
             </div>
           </div>
 
@@ -98,17 +144,23 @@ const RosinPricePanel: React.FC = () => {
             <div className="flex-1 mb-4 rounded-lg py-4 border border-[#8d7546] hover:shadow-lg transition-shadow duration-200 grid grid-cols-3">
               <div className="text-center">
                 <h2 className="text-gray-950 mb-1 text-sm">越南湿地松</h2>
-                <p className="text-2xl font-bold text-[#8d7546]">700</p>
+                <p className="text-2xl font-bold text-[#8d7546]">
+                  {resoinPriceData?.rosinMarketPrice.vietnam}
+                </p>
               </div>
 
               <div className="text-center border-l border-l-[#8d7546]">
                 <h2 className="text-gray-950 mb-1 text-sm">印尼</h2>
-                <p className="text-2xl font-bold text-[#8d7546]">600</p>
+                <p className="text-2xl font-bold text-[#8d7546]">
+                  {resoinPriceData?.rosinMarketPrice.indonesia}
+                </p>
               </div>
 
               <div className="text-center border-l border-l-[#8d7546]">
                 <h2 className="text-gray-950 mb-1 text-sm">巴西</h2>
-                <p className="text-2xl font-bold text-[#8d7546]">80</p>
+                <p className="text-2xl font-bold text-[#8d7546]">
+                  {resoinPriceData?.rosinMarketPrice.brazil}
+                </p>
               </div>
             </div>
 
@@ -122,7 +174,9 @@ const RosinPricePanel: React.FC = () => {
                 }}
               >
                 <h2 className="text-gray-500 mb-1 text-sm">7天内高价</h2>
-                <p className="text-2xl font-bold text-gray-800">9800</p>
+                <p className="text-2xl font-bold text-gray-800">
+                  {resoinPriceData?.rosinMarketPrice.sevenDaysHigh}
+                </p>
               </div>
               <div
                 className="flex-1 rounded-lg p-4 bg-white hover:shadow-lg transition-shadow duration-200"
@@ -132,7 +186,9 @@ const RosinPricePanel: React.FC = () => {
                 }}
               >
                 <h2 className="text-gray-500 mb-1 text-sm">7天内低价</h2>
-                <p className="text-2xl font-bold text-gray-800">10000</p>
+                <p className="text-2xl font-bold text-gray-800">
+                  {resoinPriceData?.rosinMarketPrice.sevenDaysLow}
+                </p>
               </div>
               <div
                 className="flex-1 rounded-lg p-4 bg-white hover:shadow-lg transition-shadow duration-200"
@@ -142,7 +198,9 @@ const RosinPricePanel: React.FC = () => {
                 }}
               >
                 <h2 className="text-gray-500 mb-1 text-sm">采购均价市场均价差</h2>
-                <p className="text-2xl font-bold text-gray-800">150</p>
+                <p className="text-2xl font-bold text-gray-800">
+                  {resoinPriceData?.rosinMarketPrice.sevenDaysAverage}
+                </p>
               </div>
             </div>
           </div>
@@ -159,7 +217,10 @@ const RosinPricePanel: React.FC = () => {
                 <span className="px-3 py-0.5 bg-gray-50 rounded text-gray-600 font-medium text-sm">
                   马尾松
                 </span>
-                <span className="text-gray-500 text-sm">湿地松松香价格240325-250120</span>
+                <span className="text-gray-500 text-sm">
+                  湿地松松香价格 &nbsp;
+                  <span className="text-yellow-800 font-[700]">{sevenDayDate}</span>
+                </span>
               </div>
               <LineChart
                 width={520}
@@ -388,6 +449,8 @@ const RosinPricePanel: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {loading && <Spin fullscreen size="large" tip="Loading" />}
     </MainPage>
   );
 };
