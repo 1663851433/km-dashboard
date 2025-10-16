@@ -9,7 +9,7 @@ const { Title, Text } = Typography;
 
 interface GuidePriceCardProps {
   title: string;
-  price: string;
+  price: string | number;
   icon: React.ReactNode;
 }
 
@@ -37,23 +37,20 @@ const GuidePriceCard: React.FC<GuidePriceCardProps> = ({ title, price, icon }) =
 
 const GuidePriceCards: React.FC = () => {
   const suggestedPrice = useWeeklyDashboardStores((state) => state.suggestedPrice);
+  const { wetlandPine, simaoPine, massonPine } = suggestedPrice;
   return (
     <>
       <GuidePriceCard
-        title="松脂指导价"
-        price={suggestedPrice.rosin.toFixed(2)}
+        title="湿地松指导价"
+        price={wetlandPine || 0}
         icon={<ArrowUpNarrowWide size={24} />}
       />
       <GuidePriceCard
-        title="松香采购指导价"
-        price={suggestedPrice.colophony.toFixed(2)}
+        title="马尾松指导价"
+        price={massonPine || 0}
         icon={<TrendingUp size={24} />}
       />
-      <GuidePriceCard
-        title="松节油采购指导价"
-        price={suggestedPrice.pineTar.toFixed(2)}
-        icon={<Droplets size={24} />}
-      />
+      <GuidePriceCard title="思茅松指导价" price={simaoPine || 0} icon={<Droplets size={24} />} />
     </>
   );
 };

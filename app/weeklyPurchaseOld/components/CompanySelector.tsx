@@ -66,7 +66,7 @@ const CompanySelector: React.FC = () => {
   return (
     <>
       <Card className="gradient-card h-full">
-        <CardContent>
+        <CardContent className="flex justify-start items-center gap-[20px]">
           <div className="flex items-center gap-[5px]">
             <Text className="font-medium text-white">分公司</Text>
             <div className="flex items-center gap-2">
@@ -114,16 +114,16 @@ const CompanySelector: React.FC = () => {
             </div>
           </div>
 
-          <div>
+          <div className="ml-auto">
             <Button type="primary" onClick={() => handleQuery()}>
               查 询
             </Button>
-            &emsp;
+            {/* &emsp;
             <Upload accept=".xlsx,.xls" beforeUpload={handleImport} fileList={[]}>
               <Button icon={<UploadOutlined />} type="dashed">
                 导 入
               </Button>
-            </Upload>
+            </Upload> */}
           </div>
         </CardContent>
       </Card>

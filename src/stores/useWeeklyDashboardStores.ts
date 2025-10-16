@@ -41,9 +41,9 @@ export interface WeeklyDashboardStateProps {
    * 指导价
    */
   suggestedPrice: {
-    rosin: number; //
-    colophony: number; //松香
-    pineTar: number; //松节油
+    wetlandPine: number; //
+    massonPine: number; //松香
+    simaoPine: number; //松节油
   };
   /**
    * 库存
@@ -82,9 +82,9 @@ const initState: WeeklyDashboardStateProps = {
     nextWeek: [],
   },
   suggestedPrice: {
-    rosin: 0,
-    colophony: 0,
-    pineTar: 0,
+    wetlandPine: 0,
+    massonPine: 0,
+    simaoPine: 0,
   },
   inventory: {
     curWeek: [],

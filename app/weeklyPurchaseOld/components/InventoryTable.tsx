@@ -14,7 +14,7 @@ interface DataType {
   湖南: number;
   广西: number;
   普源: number;
-  封开: number;
+  吉安科茂: number;
 }
 
 const columns: TableProps<DataType>["columns"] = [
@@ -49,9 +49,9 @@ const columns: TableProps<DataType>["columns"] = [
     key: "普洱",
   },
   {
-    title: "封开",
-    dataIndex: "封开",
-    key: "封开",
+    title: "吉安科茂",
+    dataIndex: "吉安科茂",
+    key: "吉安科茂",
   },
 ];
 
