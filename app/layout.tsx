@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import AntdClientLocale from "@/components/AntdClientLocale";
 import NProgressClient from "@/components/NProgressClient";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
@@ -37,7 +39,9 @@ export default function RootLayout({
         <ConfigProvider locale={zhCN}>
           <AntdRegistry>
             <AntdClientLocale />
-            <NProgressClient />
+            <Suspense fallback={null}>
+              <NProgressClient />
+            </Suspense>
             {children}
           </AntdRegistry>
         </ConfigProvider>
