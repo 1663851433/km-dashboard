@@ -49,15 +49,15 @@ const WeeklyPurchaseDashboard: FC = () => {
         />
       </div> */}
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+      <div className="grid grid-cols-1 min-[1400px]:grid-cols-2  gap-4">
         {/* 左侧内容 */}
-        <div className="lg:col-span-6 space-y-4">
+        <div className="space-y-4">
           {/* 选择器 */}
           <Row gutter={16}>
-            <Col span={8}>
+            <Col span={10}>
               <CurTime />
             </Col>
-            <Col span={16}>
+            <Col span={14}>
               <CompanySelector />
             </Col>
           </Row>
@@ -74,7 +74,7 @@ const WeeklyPurchaseDashboard: FC = () => {
         </div>
 
         {/* 右侧内容 */}
-        <div className="lg:col-span-6 space-y-4">
+        <div className="space-y-4">
           {/* 右上方指导价格卡片 */}
           <div className="grid grid-cols-3 gap-4">
             <GuidePriceCards />

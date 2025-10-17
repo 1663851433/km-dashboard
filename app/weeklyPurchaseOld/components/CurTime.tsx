@@ -1,7 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
-import { getWeekRange } from "@/src/utils/utils";
+import { cn, getWeekRange } from "@/src/utils/utils";
 import { Card, DatePicker } from "antd";
 import dayjs from "dayjs";
 import weekOfYear from "dayjs/plugin/weekOfYear";
@@ -20,6 +20,12 @@ export default () => {
   // 获取当前周数
   const curWeekth = useMemo(() => {
     return dayjs(curDate).week();
+  }, [curDate]);
+  const curDateRange = useMemo(() => {
+    const formatStr = "MM/DD";
+    const { startTime, endTime } = getWeekRange(curDate.toDate());
+
+    return `${dayjs(startTime).format(formatStr)} - ${dayjs(endTime).format(formatStr)}`;
   }, [curDate]);
 
   const disabledDate = (current: any) => {
@@ -45,11 +51,12 @@ export default () => {
         <div
           className="text-center px-4 py-2 flex items-center gap-[2px] cursor-pointer relative"
           onClick={() => {
-            setPanelVisible(true);
+            setPanelVisible((prev) => !prev);
           }}
         >
-          <div className="font-medium text-[22px]">{dayjs(curDate).format("YYYY-MM-DD")}</div>
-          <ChevronDown />
+          <div className="font-medium text-[22px]">{curDateRange}</div>
+
+          <ChevronDown className={cn(panelVisible ? "rotate-[180deg]" : "")} />
 
           <div
             className="absolute w-0 h-0 overflow-hidden top-0"
@@ -61,9 +68,12 @@ export default () => {
             }}
           >
             <DatePicker
+              picker="week"
               open={panelVisible}
+              value={curDate}
               disabledDate={disabledDate}
-              onChange={(date) => {
+              onChange={(date, dateStr) => {
+                if (!date || !date.isValid()) return;
                 setCurDate(date);
                 setPanelVisible(false);
               }}

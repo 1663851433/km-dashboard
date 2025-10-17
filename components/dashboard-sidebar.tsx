@@ -3,14 +3,8 @@
 import { BarChart, ChevronRight, DollarSign, Handshake, Home, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 
-import { Button } from "@/components/ui/button";
-import {
-  TooltipContent,
-  TooltipProvider,
-  TooltipRoot,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { cn } from "@/src/utils/utils";
+import { Button, Tooltip } from "antd";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -25,56 +19,44 @@ const navItems = [
 
 export function DashboardSidebar({ className }: { className?: string }) {
   const pathname = usePathname();
-  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <TooltipProvider delayDuration={0}>
-      <div
-        className={cn(
-          `${
-            isExpanded ? "w-16" : "w-3"
-          } bg-[#252b48] flex flex-col items-center py-4 space-y-4 relative transition-all duration-300`,
-          className
-        )}
-        onMouseEnter={() => setIsExpanded(true)}
-        onMouseLeave={() => setIsExpanded(false)}
-      >
-        <div
-          className={`absolute right-0 top-1/2 -translate-y-1/2 transition-opacity duration-300 ${
-            isExpanded ? "opacity-0" : "opacity-100"
-          }`}
-        >
-          <ChevronRight className="h-4 w-4 text-white/50" />
-        </div>
+    <div
+      className={cn(
+        `w-16 bg-[#252b48] flex flex-col items-center py-4 space-y-4 relative transition-all duration-300`,
+        className
+      )}
+    >
+      <div className={`absolute right-0 top-1/2 -translate-y-1/2 transition-opacity duration-300 `}>
+        <ChevronRight className="h-4 w-4 text-white/50" />
+      </div>
 
-        <div
-          className={`transition-opacity ${
-            isExpanded ? "opacity-100" : "opacity-0"
-          } flex flex-col items-center space-y-2`}
-        >
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            return (
-              <TooltipRoot key={item.href}>
-                <TooltipTrigger asChild>
-                  <Link href={item.href}>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className={`h-10 w-10 ${
-                        pathname === item.href ? "bg-[#1a1f37]" : ""
-                      } text-white`}
-                    >
-                      <Icon className="h-5 w-5" />
-                    </Button>
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent side="right">{item.label}</TooltipContent>
-              </TooltipRoot>
-            );
-          })}
+      <div className={`transition-opacity flex flex-col items-center space-y-2`}>
+        {navItems.map((item) => {
+          const Icon = item.icon;
+          return (
+            <Tooltip
+              key={item.href}
+              title={item.label}
+              placement="right"
+              className={cn(
+                "w-[40px] h-[40px] rounded-[5px] flex justify-center items-center hover:bg-black/80",
+                pathname == item.href ? "bg-black/80" : ""
+              )}
+            >
+              <Link href={item.href}>
+                <Button
+                  type="text"
+                  className={`h-10 w-10 !p-0 flex items-center justify-center text-white`}
+                >
+                  <Icon className="h-5 w-5" color="white" />
+                </Button>
+              </Link>
+            </Tooltip>
+          );
+        })}
 
-          {/* <div className="mt-auto">
+        {/* <div className="mt-auto">
             <TooltipRoot>
               <TooltipTrigger asChild>
                 <Button variant="ghost" size="icon" className="h-10 w-10 text-white">
@@ -86,8 +68,7 @@ export function DashboardSidebar({ className }: { className?: string }) {
               </TooltipContent>
             </TooltipRoot>
           </div> */}
-        </div>
       </div>
-    </TooltipProvider>
+    </div>
   );
 }
